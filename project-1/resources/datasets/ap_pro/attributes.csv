@@ -1,0 +1,18 @@
+Code,Name
+VisitID,ID of a visit 
+RecordID,ID of a record
+Age,Age (in years)
+Sex,Gender
+PainDur,Duration of pain (in hours)
+PainSite,Site of pain
+PainType,Type of pain
+Vomiting,Vomiting
+PrevVis,Previous visit
+Temp,Temperature (Celsius)
+TendSite,Site of tenderness
+Guard,Localized guarding
+RebTend,Rebound tenderness
+PainShift,Shifting of pain
+WBC,WBC
+Triage,Final triage category (established during follow-up)
+Observer,Triage category suggested by an observer during assessment

@@ -1,0 +1,27 @@
+Code,Name
+NUMBER,Study ID number
+SEX,Gender
+TEMP,Corrected temperature
+HEART_RATE,Heart Rate
+AGE,Age (in years)
+PREV_VISIT,Previous MD visit
+HX_TRAUMA,Hx of mild trauma within 2 weeks
+COMPLAINT_SITE,Location of complaint
+HX_ILLNESS,Hx of systemic ilness
+GAIT_REPORTED,Reported gait
+DURATION,Duration of symptoms (in days)
+APPEARANCE,General appearance
+HIP_REST,Position of hip at rest
+HIP_ROM,ROM of hip
+HIP_INT_ROT,Int rot of hip
+HIP_FLEXION,Flexion of Hip
+GAIT_OBSERVED,Observed gait
+PAIN_ROM_HIP,Pain with ROM of hip
+OTHER_PAIN_SITE,Location of other pain
+PAIN_PALPATION,Pain with palpation of hip
+SWELLING,Swelling erythema of hip
+CURRENT_ILLNESS,Current systemic illness
+PREV_PROBLEMS,Previous hip problems
+WBC,WBC
+ESR,ESR
+TRIAGE,Final triage category

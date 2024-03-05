@@ -1,0 +1,32 @@
+Code,Name
+NUMBER,Study ID number
+AGE,Age (in years)
+HX_AS,Prior hx of acute scrotal pain
+NAUSEA,Nausea with current presentation
+VOMIT,Vomiting with current presentation
+NAUSEA_OR_VOMIT,"Nausea and/or vomiting with current presentation (VOMIT=YES may include NAUSEA=YES, ie. Vomiting overrides Nausea)"
+ABD_PAIN,Abdominal pain with current presentation
+ONSET,Rapidity of onsent
+PAIN_TYPE,Type of pain
+DURATION,Duration of pain (in hours)
+ASSOC_UT_SX,"Associated dysuria, frequency or ugency"
+HX_TRAUMA,History of minor trauma
+HX_SPORTS,History of pain during sport
+HX_SEX,History of prior sexual activity
+PMHX_UTI,Previous UTI's
+PMHX_SURG,Previous urologic surgery
+PMHX_UT_ABN,Previous abnormality of the urinary tract
+PMHX_URETH_INSTR,Previous urethral instrumentation
+TEMP,Current temperature in celsius
+LOCATION,Location of pain
+SITE_TENDER,Site of tenderness on exam
+SITE_SWELLING,Site of swelling on exam
+COLOR,Color of scrotum on exam
+TEST_LIE,Orientation of testicle on exam
+CORD_PALP,Presence of cord on exam
+CREM_REF,Presence of cremesteric reflex
+TRANSILLUM,Transillumination
+URINE_WBC,Urine WBC on microscopy
+URINE_BACT,Bacteria on urine microscopy
+URINE_RBC,Urine red cells on microscopy
+TRIAGE,Final triage category
