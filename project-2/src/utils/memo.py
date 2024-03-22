@@ -14,7 +14,6 @@ def memo(type: MemoType = 'memory', verbose: bool | int = False):
 
   :parameter typeOrFn: Memoization type. Either 'file' or 'memory'. Defaults to 'memory'. Function can be passed as a parameter to specify memoization type.
   :parameter verbose: Whether to print memoization information. Defaults to False.
-  :parameter saveall: Whether to save all files or just the last one. Defaults to False.
   """
 
   match type:
