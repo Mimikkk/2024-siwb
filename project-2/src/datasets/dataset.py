@@ -32,7 +32,7 @@ class Dataset(object):
   pattern: PatternFrame
 
   @classmethod
-  @memo(typeOrFn='file', verbose=True)
+  @memo(type='file', verbose=True)
   def read(
       cls,
       root: PathLike,

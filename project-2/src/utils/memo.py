@@ -6,7 +6,7 @@ from typing import Literal, TypeVar, Callable, Any, get_args
 
 MemoType = Literal['file', 'memory']
 Fn = TypeVar('Fn', bound=Callable[..., Any])
-def memo(typeOrFn: MemoType = 'memory', verbose: bool | int = False):
+def memo(type: MemoType = 'memory', verbose: bool | int = False):
   """
   Memoize function call to file system based on hash of function arguments.
   Its purpose is to speed up development by caching function calls. Functions that are already fast should not be memoized, as the overhead of reading and writing to the file system will slow them down.
@@ -17,7 +17,7 @@ def memo(typeOrFn: MemoType = 'memory', verbose: bool | int = False):
   :parameter saveall: Whether to save all files or just the last one. Defaults to False.
   """
 
-  match typeOrFn:
+  match type:
     case 'file':
       def wrap(fn: Fn) -> Fn:
         @functools.wraps(fn)
@@ -59,6 +59,6 @@ def memo(typeOrFn: MemoType = 'memory', verbose: bool | int = False):
     case str(invalid_type):
       raise ValueError(f'Invalid memo type: "{invalid_type}", available types are {get_args(MemoType)}')
     case _:
-      return memo('memory')(typeOrFn)
+      return memo('memory')(type)
 
   return wrap
