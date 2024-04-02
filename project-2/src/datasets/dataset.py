@@ -8,22 +8,24 @@ from pandera.typing import DataFrame
 from ..utils.memo import memo
 
 Bases = ('A', 'C', 'T', 'G')
-class HNRNPCSchema(SchemaModel):
-  fshape_coefficient: float = Field()
+class ProteinSchema(SchemaModel):
+  reactivity: float = Field()
   base: Optional[str] = Field(isin=Bases, nullable=True)
 
 class BindingSiteSchema(SchemaModel):
-  fshape_coefficient: Optional[float] = Field(nullable=True)
+  reactivity: Optional[float] = Field(nullable=True)
   base: Optional[str] = Field(isin=Bases)
+  filename: str = Field()
 
 class SearchSchema(SchemaModel):
-  fshape_coefficient: Optional[float] = Field(nullable=True)
+  reactivity: Optional[float] = Field(nullable=True)
   base: Optional[str] = Field(isin=Bases, nullable=True)
   shape_coefficient: Optional[float] = Field(nullable=True)
+  filename: str = Field()
 
 SearchFrame = DataFrame[SearchSchema]
 BindingSiteFrame = DataFrame[BindingSiteSchema]
-PatternFrame = DataFrame[HNRNPCSchema]
+PatternFrame = DataFrame[ProteinSchema]
 
 @dataclass
 class Dataset(object):
@@ -42,15 +44,16 @@ class Dataset(object):
   ):
     root = pathlib.Path(root)
 
-    pattern = HNRNPCSchema.validate(
+    pattern = ProteinSchema.validate(
       read_csv(root / expected_pattern, sep='\t', header=None, na_values='N')
-      .rename(columns={0: 'fshape_coefficient', 1: 'base'})
+      .rename(columns={0: 'reactivity', 1: 'base'})
     )
 
     sites = [
       BindingSiteSchema.validate(
         read_csv(path, sep='\t', header=None, na_values=('NA', 'N'))
-        .rename(columns={0: 'fshape_coefficient', 1: 'base'})
+        .rename(columns={0: 'reactivity', 1: 'base'})
+        .assign(filename=path.stem)
       )
       for path in (root / binding_sites).glob('*.txt')
     ]
@@ -58,7 +61,8 @@ class Dataset(object):
     searches = [
       SearchSchema.validate(
         read_csv(path, sep='\t', header=None, na_values=('NA', 'N'))
-        .rename(columns={0: 'fshape_coefficient', 1: 'base', 2: 'shape_coefficient'})
+        .rename(columns={0: 'reactivity', 1: 'base', 2: 'shape_coefficient'})
+        .assign(filename=path.stem)
       )
       for path in (root / search).glob('*.txt')
     ]
