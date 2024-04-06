@@ -4,13 +4,19 @@ Link = 'https://github.com/sysmon37/fl-bench.git'
 Path = './fl-bench'
 
 def main():
-  if not os.path.exists(Path):
-    command = f'git clone {Link} {Path}'
-    print('Downloading repository from github...')
-    os.system(command)
-    print('Repository downloaded.')
-  else:
+  if os.path.exists(Path):
     print('Repository already downloaded.')
+    return
+
+  command = f'git clone {Link} {Path}'
+  print('Downloading repository from github...')
+  os.system(command)
+  print('Repository downloaded.')
+
+  command = f'cp -r ./resources/datasets/* {Path}/data/'
+  print('Copying datasets to fl-bench...')
+  os.system(command)
+  print('Datasets copied.')
 
 if __name__ == '__main__':
   main()
