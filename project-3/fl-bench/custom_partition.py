@@ -25,8 +25,14 @@ logger = logging.getLogger()
 VariantType = Literal['preserved', 'random']
 PartitionType = Literal['small', 'average', 'large']
 def parse_partition(partition: str) -> tuple[PartitionType, VariantType, float, float, float]:
+  """
+  Expected format: "{PartitionType}_{VariantType}"
+  """
   try:
     partition_type, variant_type = partition.split('_')
+
+    if partition_type not in get_args(PartitionType) or variant_type not in get_args(VariantType):
+      raise TypeError
 
     return (
       partition_type,
