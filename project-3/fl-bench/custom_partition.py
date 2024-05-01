@@ -1,8 +1,8 @@
 import logging
 import numpy as np
 import numpy.typing as NDArray
-from typing import Literal, NamedTuple, get_args
 from scipy.stats import beta as distribute_beta, dirichlet
+from custom_partition_type import parse, VariantType, read_beta_distribution_parameters
 
 # Funkcja custom_partition.assign_samples_to_clients odpowiada za przydzielanie
 # przykładów uczących do poszczególnych klientów.
@@ -22,52 +22,58 @@ from scipy.stats import beta as distribute_beta, dirichlet
 #   a funkcją partition.partition_data, dodatkowy opis w pracy [6].
 
 logger = logging.getLogger()
-VariantType = Literal['preserved', 'random']
-PartitionType = Literal['small', 'average', 'large']
-def parse_partition(partition: str) -> tuple[PartitionType, VariantType, float, float, float]:
-  """
-  Expected format: "{PartitionType}_{VariantType}"
-  """
-  try:
-    partition_type, variant_type = partition.split('_')
 
-    if partition_type not in get_args(PartitionType) or variant_type not in get_args(VariantType):
-      raise TypeError
-
-    return (
-      partition_type,
-      variant_type,
-      5 if partition_type == 'large' else 2,
-      5 if partition_type == 'small' else 2,
-      1
-    )
-  except:
-    raise ValueError(
-      f'Invalid partition: "{partition}"'
-      f'\nExpected format: "{get_args(PartitionType)}_{get_args(VariantType)}"'
-    )
-
-def assign_examples_to_clients(labels: NDArray, n_parties: int, partition: str) -> dict[int, NDArray]:
-  logger.info(f"Running custom partitioning: {partition}")
-
-  _, variant_type, alpha, beta, alpha_dirchlet = parse_partition(partition)
+def calculate_distribution_sizes(labels: NDArray, distribution: list[float]) -> NDArray:
   label_count = len(labels)
-
-  distribution_sizes = distribute_beta(alpha, beta).rvs(n_parties)
+  distribution_sizes = np.array(distribution)
   distribution_sizes /= distribution_sizes.sum()
 
   client_sizes = (distribution_sizes * label_count).astype(int)
-  client_sizes[0] += label_count - client_sizes.sum()
+  remainder = label_count - client_sizes.sum()
+  client_sizes[0] += remainder
 
-  splits = {i: [] for i in range(n_parties)}
-  match variant_type:
+  assert \
+    sum(client_sizes) == label_count, \
+    "Sum of client sizes must be equal to the number of labels so no label is left behind"
+
+  return client_sizes
+
+def class_proportions_by_variant(variant: VariantType, label_count: int, n_parties: int) -> NDArray:
+  proportions = np.zeros((n_parties, label_count))
+
+  match variant:
     case 'preserved':
-      for class_id, size in enumerate(client_sizes):
-        splits[class_id] = np.random.choice(range(label_count), size=size, replace=False)
+      proportions = np.ones((n_parties, label_count)) / label_count
     case 'random':
-      class_proportions = dirichlet([alpha_dirchlet] * label_count).rvs(n_parties)
+      proportions = dirichlet([1] * label_count).rvs(n_parties)
 
-      for class_id, size, proportions in enumerate(zip(client_sizes, class_proportions)):
-        splits[class_id] = np.random.choice(range(label_count), size=size, replace=False, p=proportions)
+  assert \
+    all(round(proportion_sum, 4) == 1.000 for proportion_sum in proportions.sum(axis=1)), \
+    f"Proportions on each party must sum to 1, got {proportions.sum(axis=1)}"
 
-  return splits
+  assert \
+    proportions.shape == (n_parties, label_count), \
+    f"Proportions matrix must have the shape ({n_parties}, {label_count}), got {proportions.shape}"
+
+  return proportions
+
+ClientMap = dict[int, NDArray]
+
+def create_client_map(client_sizes: NDArray, label_count: int, proportions: NDArray) -> ClientMap:
+  return {
+    client_id: np.random.choice(range(label_count), size=size, replace=False, p=proportions[client_id])
+    for client_id, size in enumerate(client_sizes)
+  }
+
+def assign_examples_to_clients(labels: NDArray, n_parties: int, partition: str) -> ClientMap:
+  logger.info(f"Running custom partitioning: {partition}")
+
+  partition_type, variant = parse(partition)
+  alpha, beta = read_beta_distribution_parameters(partition_type)
+
+  label_count = len(labels)
+  distribution = distribute_beta(alpha, beta).rvs(n_parties)
+  client_sizes = calculate_distribution_sizes(labels, distribution)
+  client_class_proportions = class_proportions_by_variant(variant, label_count, n_parties)
+
+  return create_client_map(client_sizes, label_count, client_class_proportions)

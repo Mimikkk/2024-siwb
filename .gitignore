@@ -6,4 +6,5 @@
 project-3/fl-bench/*
 !project-3/fl-bench/data/
 !project-3/fl-bench/custom_partition.py
+!project-3/fl-bench/custom_partition_type.py
 project-4/resources/datasets/RNA-Puzzles
