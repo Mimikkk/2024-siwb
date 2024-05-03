@@ -139,9 +139,6 @@ method_by_variant: dict[VariantType, Callable[[NDArray, NDArray], ClientMap]] = 
   'preserved': create_preserved_client_map,
 }
 
-def pick_one(array):
-  return np.random.choice(array, size=1)[0]
-
 def assign_examples_to_clients(labels: NDArray, n_parties: int, partition: str) -> ClientMap:
   logger.info(f"Running custom partitioning: {partition}")
 
