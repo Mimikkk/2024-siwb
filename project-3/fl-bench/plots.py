@@ -22,6 +22,13 @@ plt.plot(df_prox.idx, df_prox.te_gmean, "--", color=color(9))
 plt.xlabel('Communication round')
 plt.ylabel('Global Model Test accuracy')
 plt.title("Distribution variant: "+args.variant)
+pos = 29
+idx = len(df_avg.te_acc) - 1
+buf = 0.005
+plt.text(pos, df_avg.te_acc[idx] + buf, round(df_avg.te_acc[idx], 3), ha = 'center')
+plt.text(pos, df_avg.te_gmean[idx] + buf, round(df_avg.te_gmean[idx], 3), ha = 'center')
+plt.text(pos, df_prox.te_acc[idx] + buf, round(df_prox.te_acc[idx], 3), ha = 'center')
+plt.text(pos, df_prox.te_gmean[idx] + buf, round(df_prox.te_gmean[idx], 3), ha = 'center')
 plt.legend(['FedAvg acc', 'FedProx acc', 'FedAvg gmean', 'FedProx gmean'])
 
 # save the figure
