@@ -9,3 +9,5 @@ project-3/fl-bench/*
 !project-3/fl-bench/custom_partition_type.py
 project-4/resources/datasets/RNA-Puzzles
 project-4/resources/datasets/representations
+project-5/simulator/*
+
