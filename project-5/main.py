@@ -24,9 +24,6 @@
 
 # 1. Create a new class that represents a patient profile.
 # 2. Implement the characteristics of the profile in the simulation environment.
-# 3. Consider the limitations of the current version of the environment.
-# 4. Make simplifications when comparing a given patient with a group.
-# 5. Simulate the behavior of the group.
 
 # Part 2
 # Perform a computational experiment verifying the behavior of the simulated patient (modeled
@@ -60,8 +57,6 @@
 #   c. reinforcement learning (DQN, PPO, A2C).
 # 5. Visualize the results using graphs.
 # 6. Prepare a notebook describing the patient profile and the simulation results.
-# 7. Work in groups of 4 people, each modeling one profile and conducting simulations.
-# 8. Consider modifications common to the group.
 
 
 def main():
