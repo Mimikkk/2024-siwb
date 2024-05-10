@@ -10,8 +10,10 @@ project-3/fl-bench/*
 project-4/resources/datasets/RNA-Puzzles
 project-4/resources/datasets/representations
 project-4/catboost_info/*
+project-5/simulator/*
 project-5/simulator/*.*
 project-5/simulator/Dockerfile
 !project-5/simulator/experiments_custom.ipynb
 project-5/simulator/environment/*
 !project-5/simulator/environment/custom_behavioural_model.py
+project-6/SPOT-RNA/*
