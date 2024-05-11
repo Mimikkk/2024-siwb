@@ -7,6 +7,7 @@ def main():
     os.system(f"git clone {Link}")
 
     os.chdir("./SPOT-RNA")
+    # os.system("rm -rf .git")
     os.system(
         "wget 'https://www.dropbox.com/s/dsrcf460nbjqpxa/SPOT-RNA-models.tar.gz' || \
         wget -O SPOT-RNA-models.tar.gz 'https://app.nihaocloud.com/f/fbf3315a91d542c0bdc2/?dl=1'"
