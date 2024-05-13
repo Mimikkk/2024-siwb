@@ -20,4 +20,6 @@ project-5/simulator/Dockerfile
 !project-5/simulator/environment/profile_1_stressful.py
 !project-5/simulator/environment/profile_2_motivated.py
 !project-5/simulator/environment/profile_3_responsive.py
-project-6/resources/*
+project-6/resources/datasets/*
+project-6/resources/results/*
+!project-6/resources/results/*.csv

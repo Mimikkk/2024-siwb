@@ -11,6 +11,7 @@ def main():
     )
     os.system("source .venv/bin/activate")
     os.system("pip install mxfold2-0.1.2.tar.gz && rm mxfold2-0.1.2.tar.gz")
+    os.system("pip install jupyter")
 
 
 if __name__ == "__main__":
