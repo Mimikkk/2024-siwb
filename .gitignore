@@ -16,8 +16,8 @@ project-5/simulator/environment/fogg_behavioural_model.py
 project-5/simulator/Dockerfile
 !project-5/simulator/experiments_custom.ipynb
 !project-5/simulator/experiments_profiles.ipynb
-!project-5/simulator/environment/profile_0_motivationless.py
-!project-5/simulator/environment/profile_1_stressful.py
+!project-5/simulator/environment/profile_0_indifferent.py
+!project-5/simulator/environment/profile_1_stressed.py
 !project-5/simulator/environment/profile_2_motivated.py
 !project-5/simulator/environment/profile_3_responsive.py
 project-6/mxfold2-0.1.2

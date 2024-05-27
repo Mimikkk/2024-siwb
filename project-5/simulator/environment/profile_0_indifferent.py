@@ -1,6 +1,6 @@
 from .fogg_behavioural_model import Patient
 
-class Profile0Motivationless(Patient):
+class Profile0Indifferent(Patient):
   """
   Description:
     Patients of this cluster have low motivation from both self-improvement and social competition aspects,

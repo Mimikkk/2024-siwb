@@ -1,7 +1,7 @@
 import random
 from .fogg_behavioural_model import Patient
 
-class Profile1Stressful(Patient):
+class Profile1Stressed(Patient):
   """
   Description:
     These patients do not respond well to interventions during stressful times,
