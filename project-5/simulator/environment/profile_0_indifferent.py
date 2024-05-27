@@ -16,7 +16,7 @@ class Profile0Indifferent(Patient):
   """
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
-    self.responsiveness = 2
+    self.responsiveness = 0
 
 
   def fogg_behaviour(self, motivation: int, ability: int, trigger: bool) -> bool:
