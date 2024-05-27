@@ -6,13 +6,6 @@ class Profile1Stressed(Patient):
   Description:
     These patients do not respond well to interventions during stressful times,
     suggesting that their interactions should be timed during moments of calm.
-
-    narcisstic = no {0, 1}
-    self_motivated = no (0, 1) depending on previous responses to interventions, 
-    competition_driven = no {0, 1}
-    responsive = 2 {0, 1, 2}
-
-
   """
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
@@ -32,7 +25,6 @@ class Profile1Stressed(Patient):
         self._update_motion_activity()
         self._update_location()
         self._update_emotional_state()
-        self.responsiveness = 2 - max( self.stress, 0.5*self.tiredness) 
     else:
         self.location = 'home'
         self.motion_activity_list.append('stationary')

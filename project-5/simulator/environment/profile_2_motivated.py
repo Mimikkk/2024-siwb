@@ -8,8 +8,6 @@ class Profile2Motivated(Patient):
   Description:
     Motivated by visible progress and achievements, this group benefits from features that track and
     display their health progress, enhancing their engagement through tangible results.
-
-    At the same time, these patients also do not respond well to interventions during stressful times.
   """
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)

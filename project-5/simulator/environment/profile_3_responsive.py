@@ -8,9 +8,6 @@ class Profile3Responsive(Patient):
   Description:
     Highly responsive to environmental cues and timely prompts, these patients are ideal candidates for adaptive
     interventions that respond dynamically to their current context.
-
-    But the influence of peers or others is less than in Profile 2
-    Neutral to stress
   """
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
