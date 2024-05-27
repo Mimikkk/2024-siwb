@@ -36,7 +36,7 @@ class Profile3Responsive(Patient):
         self._update_location()
         self._update_emotional_state()
         self.peer_competition = np.random.randint(0, 2)
-        self.responsiveness = 2 - max( self.stress, 0.5*self.tiredness) 
+        self.responsiveness = - max( self.stress, 0.5*self.tiredness) 
     else:
         self.location = 'home'
         self.peer_competition = 0

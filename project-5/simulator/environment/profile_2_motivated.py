@@ -36,7 +36,7 @@ class Profile2Motivated(Patient):
         self._update_location()
         self._update_emotional_state() # valence, arousal, stress
         self.peer_competition = np.random.randint(0, 2)
-        self.responsiveness = 2 - max(self.stress, self.tiredness)
+        self.responsiveness = - max(self.stress, self.tiredness)
     else:
         self.location = 'home'
         self.peer_competition = 0

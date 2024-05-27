@@ -25,6 +25,7 @@ class Profile1Stressed(Patient):
         self._update_motion_activity()
         self._update_location()
         self._update_emotional_state()
+        self.responsiveness = - max(self.stress, self.tiredness) 
     else:
         self.location = 'home'
         self.motion_activity_list.append('stationary')
