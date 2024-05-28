@@ -24,3 +24,4 @@ project-6/mxfold2-0.1.2
 project-6/resources/datasets/*
 project-6/resources/results/*
 !project-6/resources/results/*.csv
+project-5/.pro4env/*
